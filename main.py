@@ -39,11 +39,7 @@ def getPrayer():
     return locations.get('prayer')
 
 def getRapidHeal():
-    
-    if prayer:
-        position = getPosition(prayer)
-        pyautogui.click(position['x'], position['y'])
-
+    clickExists('prayer')
     return locations.get('rapidHeal')
 
 def getOverload():
@@ -66,7 +62,8 @@ def getPosition(data):
         'y': y / 2
     }
 
-def getExistsInLocations(name, function):
-    if locations.get(name):
-
-    prayer = function() if locations.get(name) else locations['prayer']
+def clickExists(name):
+    loc = locations.get(name)
+    if loc:
+        position = getPosition(loc)
+        pyautogui.click(position['x'], position['y'])
