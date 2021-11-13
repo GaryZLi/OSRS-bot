@@ -1,8 +1,9 @@
 import main as bot
 
 def testAll():
-    assert bot.getInventory() != None
-    assert bot.getPrayer() != None
-    assert bot.getRapidHeal() != None
+    nmz = bot.NMZ()
+    assert nmz.getInventory() != None
+    assert nmz.getPrayer() != None
+    assert nmz.getRapidHeal() != None
 
 testAll()

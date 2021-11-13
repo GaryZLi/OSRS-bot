@@ -30,40 +30,52 @@ class Locations:
 
         return json
 
-locations = Locations()
+class NMZ:
+    def __init__(self):
+        self.locations = Locations()
 
-def getInventory():    
-    return locations.get('inventory')
+    def run():
+        pass
 
-def getPrayer():
-    return locations.get('prayer')
+    def getInventory(self):    
+        return self.locations.get('inventory')
 
-def getRapidHeal():
-    clickExists('prayer')
-    return locations.get('rapidHeal')
+    def getPrayer(self):
+        return self.locations.get('prayer')
 
-def getOverload():
-    inventory = locations.get('inventory')
-    return locations.get('overload')
+    def getRapidHeal(self):
+        loc = self.locations.get('prayer')
+        self.clickExists(loc)
+        return self.locations.get('rapidHeal')
 
-def getAbsorption():
-    return locations.get('absorption')
+    def getOverload(self):
+        loc = self.locations.get('inventory')
+        self.clickExists(loc)
+        return self.locations.get('overload')
 
-def getPosition(data):
-    x = 0
-    y = 0
+    def getAbsorption(self):
+        loc = self.locations.get('inventory')
+        self.clickExists(loc)
+        return self.locations.get('absorption')
 
-    for i in range(2):
-        x += random.randint(data['x']['low'], data['x']['high'])
-        y += random.randint(data['y']['low'], data['y']['high'])
-    
-    return {
-        'x': x / 2,
-        'y': y / 2
-    }
+    def getPositionToClick(self, data):
+        x = 0
+        y = 0
 
-def clickExists(name):
-    loc = locations.get(name)
-    if loc:
-        position = getPosition(loc)
-        pyautogui.click(position['x'], position['y'])
+        for i in range(2):
+            x += random.randint(data['x']['low'], data['x']['high'])
+            y += random.randint(data['y']['low'], data['y']['high'])
+        
+        return {
+            'x': x / 2,
+            'y': y / 2
+        }
+
+    def drinkOverload(self):
+        loc = self.getOverload()
+        self.clickExists(loc)
+
+    def clickExists(self, loc):
+        if loc:
+            position = self.getPositionToClick(loc)
+            pyautogui.click(position['x'], position['y'])
