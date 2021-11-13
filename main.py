@@ -4,10 +4,11 @@ import random
 class Locations:
     def __init__(self):
         self.locations = {}
+        self.imagePath = 'images/'
 
     def set(self, name, confidence):
         if name not in self.locations:
-            result = pyautogui.locateOnScreen(name + '.PNG', confidence)
+            result = pyautogui.locateOnScreen(self.imagePath + name + '.PNG', confidence)
             json = self.convertToJson(result) if result else None
             self.locations[name] = json
 
